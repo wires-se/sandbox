@@ -37,7 +37,9 @@ jobs:
       - name: Print the final result
         shell: bash
         run: |
-          ls
+          echo "where am I: $(pwd)"
+          ls /home/runner/work/sandbox/sandbox/artifact
+          mv //home/runner/work/sandbox/sandbox/artifact/* .
           value=`cat addition.txt`
           factor=`cat factor.txt`
           total=$(expr $value \* $factor)
