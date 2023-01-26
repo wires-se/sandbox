@@ -13,7 +13,6 @@ jobs:
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v3
         with:
-          name: addition
           path: addition.txt
 
   job_2:
@@ -23,11 +22,10 @@ jobs:
       - shell: bash
         run: |
           echo "I'm lazy, just send you the factor ..."
-          echo "9" > fator.txt
+          echo "9" > factor.txt
       - name: Upload math result for job 2
         uses: actions/upload-artifact@v3
         with:
-          name: factor
           path: factor.txt
 
   job_3:
