@@ -40,6 +40,9 @@ jobs:
           value=`cat artifact/addition.txt`
           factor=`cat artifact/factor.txt`
           total=$(expr $value \* $factor)
-          echo "# We did it! :rocket:" >> $GITHUB_STEP_SUMMARY
-          echo "The result is $total"  >> $GITHUB_STEP_SUMMARY
-
+          cat <<EOF >> $GITHUB_STEP_SUMMARY
+          # Latest Build Complete! :rocket:
+          
+          Please see <https://github.com/kernelkit/infix/releases/tag/latest>
+          for the public download artifacts of this build.
+          EOF
