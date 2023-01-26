@@ -9,44 +9,39 @@ jobs:
     steps:
       - shell: bash
         run: |
-          expr 3 + 7 > math-homework.txt
+          expr 3 + 7 > addition.txt
       - name: Upload math result for job 1
         uses: actions/upload-artifact@v3
         with:
-          name: homework
-          path: math-homework.txt
+          name: addition
+          path: addition.txt
 
   job_2:
     name: Multiply by 9
-    needs: job_1
     runs-on: ubuntu-latest
     steps:
-      - name: Download math result for job 1
-        uses: actions/download-artifact@v3
-        with:
-          name: homework
       - shell: bash
         run: |
-          value=`cat math-homework.txt`
-          expr $value \* 9 > math-homework.txt
+          echo "I'm lazy, just send you the factor ..."
+          echo "9" > fator.txt
       - name: Upload math result for job 2
         uses: actions/upload-artifact@v3
         with:
-          name: homework
-          path: math-homework.txt
+          name: factor
+          path: factor.txt
 
   job_3:
     name: Display results
-    needs: job_2
+    needs: [ job_1, job_2 ]
     runs-on: ubuntu-latest
     steps:
-      - name: Download math result for job 2
-        uses: actions/download-artifact@v3
-        with:
-          name: homework
+      - uses: actions/download-artifact@v3
       - name: Print the final result
         shell: bash
         run: |
-          value=`cat math-homework.txt`
-          echo The result is $value
+          ls
+          value=`cat addition.txt`
+          factor=`cat factor.txt`
+          total=$(expr $value \* $factor)
+          echo "The result is $total"
 
