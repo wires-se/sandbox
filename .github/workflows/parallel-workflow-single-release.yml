@@ -37,11 +37,9 @@ jobs:
       - name: Print the final result
         shell: bash
         run: |
-          echo "where am I: $(pwd)"
-          ls /home/runner/work/sandbox/sandbox/artifact
-          mv //home/runner/work/sandbox/sandbox/artifact/* .
-          value=`cat addition.txt`
-          factor=`cat factor.txt`
+          value=`cat artifact/addition.txt`
+          factor=`cat artifact/factor.txt`
           total=$(expr $value \* $factor)
-          echo "The result is $total"
+          echo "# We did it! :rocket:" >> $GITHUB_STEP_SUMMARY
+          echo "The result is $total"  >> $GITHUB_STEP_SUMMARY
 
