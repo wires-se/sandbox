@@ -34,15 +34,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
-      - name: Print the final result
-        shell: bash
+      - name: Final calculation
         run: |
           value=`cat artifact/addition.txt`
           factor=`cat artifact/factor.txt`
           total=$(expr $value \* $factor)
+          echo $total > artifact/total.txt
+      - name: Build Summary
+        run: |
           cat <<EOF >> $GITHUB_STEP_SUMMARY
           # Latest Build Complete! :rocket:
           
-          Please see <https://github.com/kernelkit/infix/releases/tag/latest>
-          for the public download artifacts of this build.
+          For the public download links of these build artifacts, please see:
+          <https://github.com/addiva-elektronik/sandbox/releases/tag/latest>
           EOF
+      - uses: pyTooling/Actions/releaser@main
+        with:
+          tag: latest
+          rm: true
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: artifact/*
