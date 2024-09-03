@@ -1,10 +1,10 @@
 Hej, text here.
 
-# A here
+## A here
 
 include::a.adoc[]
 
-# B here
+## B here
 
 include::b.adoc[]
 
